@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\mahasiswa;
 use Illuminate\Http\Request;
 
 class mahasiswaController extends Controller
@@ -27,7 +28,24 @@ class mahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        # Validasi
+        $request->validate([
+            'nim' => 'required|numeric|unique:mahasiswa,nim',
+            'nama' => 'required',
+            'jurusan' => 'required'
+        ],[
+            'nim.required' => 'NIM harus di isi',
+            'nama.required' => 'Nama harus di isi',
+            'jurusan.required' => 'Jurusan harus di isi'
+        ]);
+        # Simpan data ke database
+        $data = [
+            'nim' => $request->nim,
+            'nama' => $request->nama,
+            'jurusan' => $request->jurusan
+        ];
+
+        mahasiswa::create($data);
     }
 
     /**
