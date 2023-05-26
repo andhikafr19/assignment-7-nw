@@ -2,18 +2,6 @@
 
 @section('content')
 
-@if ($errors->any())
-<div class="pt-3">
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $item)
-                <li>{{ $item }}</li>
-            @endforeach
-        </ul>
-    </div>
-</div>
-@endif
-
 <!-- START FORM -->
 <div class="my-3 p-3 bg-body rounded shadow-sm">
     <form action='{{ url('mahasiswa') }}' method='post'>

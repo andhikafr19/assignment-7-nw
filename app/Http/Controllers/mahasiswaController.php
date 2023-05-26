@@ -12,7 +12,8 @@ class mahasiswaController extends Controller
      */
     public function index()
     {
-        return view('mahasiswa.index');
+        $data = mahasiswa::orderBy('nim', 'desc')->get();
+        return view('mahasiswa.index')->with('datam', $data);
     }
 
     /**
@@ -46,6 +47,7 @@ class mahasiswaController extends Controller
         ];
 
         mahasiswa::create($data);
+        return redirect()->to('mahasiswa')->with('success', 'Berhasil menambahkan data');
     }
 
     /**
