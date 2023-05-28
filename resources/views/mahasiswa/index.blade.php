@@ -27,20 +27,23 @@
                 </tr>
             </thead>
             <tbody>
+                <?php $i = $datam->firstItem() ?>
                 @foreach ($datam as $item)
                 <tr>
-                    <td>1</td>
+                    <td>{{ $i }}</td>
                     <td>{{ $item->nim }}</td>
                     <td>{{ $item->nama }}</td>
                     <td>{{ $item->jurusan }}</td>
                     <td>
-                        <a href='' class="btn btn-warning btn-sm">Edit</a>
+                        <a href='{{ url('mahasiswa/'.$item->nim.'/edit') }}' class="btn btn-warning btn-sm">Edit</a>
                         <a href='' class="btn btn-danger btn-sm">Del</a>
                     </td>
                 </tr>
+                <?php $i++ ?>
                 @endforeach
             </tbody>
         </table>
+        {{ $datam->links() }}
     </div>
     <!-- AKHIR DATA -->
 @endsection

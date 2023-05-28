@@ -12,7 +12,7 @@ class mahasiswaController extends Controller
      */
     public function index()
     {
-        $data = mahasiswa::orderBy('nim', 'desc')->get();
+        $data = mahasiswa::orderBy('nim', 'desc')->paginate(2);
         return view('mahasiswa.index')->with('datam', $data);
     }
 
@@ -31,9 +31,9 @@ class mahasiswaController extends Controller
     {
         # Validasi
         $request->validate([
-            'nim' => 'required|numeric|unique:mahasiswa,nim',
-            'nama' => 'required',
-            'jurusan' => 'required'
+            'nim' => 'required|min:4|numeric|unique:mahasiswa,nim',
+            'nama' => 'required|min:3',
+            'jurusan' => 'required|min:3'
         ],[
             'nim.required' => 'NIM harus di isi',
             'nama.required' => 'Nama harus di isi',
@@ -63,7 +63,8 @@ class mahasiswaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = mahasiswa::where('nim', $id)->first();
+        return view('mahasiswa.edit')->with('data', $data);
     }
 
     /**
@@ -71,7 +72,22 @@ class mahasiswaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        # Validasi
+        $request->validate([
+            'nama' => 'required|min:3',
+            'jurusan' => 'required|min:3'
+        ],[
+            'nama.required' => 'Nama harus di isi',
+            'jurusan.required' => 'Jurusan harus di isi'
+        ]);
+        # Simpan data ke database
+        $data = [
+            'nama' => $request->nama,
+            'jurusan' => $request->jurusan
+        ];
+
+        mahasiswa::where('nim', $id)->update($data);
+        return redirect()->to('mahasiswa')->with('success', 'Berhasil update data');
     }
 
     /**
