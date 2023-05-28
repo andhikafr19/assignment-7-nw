@@ -6,7 +6,8 @@
         <!-- FORM PENCARIAN -->
         <div class="pb-3">
             <form class="d-flex" action="" method="get">
-                <input class="form-control me-1" type="search" name="katakunci" value="{{ Request::get('katakunci') }}" placeholder="Masukkan kata kunci" aria-label="Search">
+                <input class="form-control me-1" type="search" name="katakunci" value="{{ Request::get('katakunci') }}"
+                placeholder="Masukkan kata kunci" aria-label="Search">
                 <button class="btn btn-secondary" type="submit">Cari</button>
             </form>
         </div>
@@ -16,7 +17,7 @@
             <a href='{{ url('mahasiswa/create') }}' class="btn btn-primary">+ Tambah Data</a>
         </div>
 
-        <table class="table table-striped">
+        <table class="table table-striped"> <!-- Mahasiswa table -->
             <thead>
                 <tr>
                     <th class="col-md-1">No</th>

@@ -32,8 +32,8 @@ class mahasiswaController extends Controller
         # Validasi
         $request->validate([
             'nim' => 'required|min:4|numeric|unique:mahasiswa,nim',
-            'nama' => 'required|min:3',
-            'jurusan' => 'required|min:3'
+            'nama' => 'required|min:4',
+            'jurusan' => 'required|min:4'
         ],[
             'nim.required' => 'NIM harus di isi',
             'nama.required' => 'Nama harus di isi',
